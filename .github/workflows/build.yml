@@ -6,9 +6,13 @@ name: Build .NET project
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 env:
   DOTNET_VERSION: 10.0.x
+  PROJECT_PATH: ./Lab-7.csproj
 
 jobs:
   build:
@@ -28,10 +32,16 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
       - name: Restore dependencies
-        run: dotnet restore Lab-7.csproj
+        shell: bash
+        run: dotnet restore "$PROJECT_PATH"
 
       - name: Build project
-        run: dotnet build Lab-7.csproj --no-restore
+        shell: bash
+        run: dotnet build "$PROJECT_PATH" --configuration Release --no-restore
+
+      - name: Run project
+        shell: bash
+        run: dotnet run --project "$PROJECT_PATH" --configuration Release --no-build
 
       - name: Run project
         run: dotnet run --project Lab-7.csproj --no-build
