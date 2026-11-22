@@ -23,3 +23,12 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
+
+      - name: Restore dependencies
+        run: dotnet restore Lab-7.csproj
+
+      - name: Build project
+        run: dotnet build Lab-7.csproj --no-restore
+
+      - name: Run project
+        run: dotnet run --project Lab-7.csproj --no-build
