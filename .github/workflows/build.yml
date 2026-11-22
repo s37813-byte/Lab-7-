@@ -42,6 +42,3 @@ jobs:
       - name: Run project
         shell: bash
         run: dotnet run --project "$PROJECT_PATH" --configuration Release --no-build
-
-      - name: Run project
-        run: dotnet run --project Lab-7.csproj --no-build
